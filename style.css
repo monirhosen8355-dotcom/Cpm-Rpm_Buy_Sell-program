@@ -204,3 +204,17 @@ input {
     .hero h1 { font-size: 2.5rem; }
     .nav-links { display: none; }
 }
+.copy-btn {
+    background: #00ffcc;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 12px;
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+.copy-btn:hover {
+    background: #00ccaa;
+}

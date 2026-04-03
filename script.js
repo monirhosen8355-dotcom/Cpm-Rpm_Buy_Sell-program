@@ -9,6 +9,7 @@ if (!localStorage.getItem('approvedTransactions')) {
 // VERIFY FUNCTION (ONE-TIME USE)
 // ===============================
 function verifyTransaction() {
+    localStorage.setItem("isVerified", "true");
     const trxInput = document.getElementById('trxId').value.trim();
     const statusBox = document.getElementById('statusBox');
     const verifyBtn = document.getElementById('verifyBtn');
@@ -48,6 +49,9 @@ function verifyTransaction() {
 
             statusBox.className = "status-box success";
             statusBox.innerHTML = "🎉 Payment Verified! Welcome to CPM Income System";
+            setTimeout(() => {
+    window.location.href = "dashboard/index.html";
+}, 2000);
         }
 
         // Invalid
@@ -68,7 +72,7 @@ function verifyTransaction() {
 function adminPanel() {
     const password = prompt("Enter Admin Password:");
 
-    if (password === "monir1020@M") {
+    if (password === "1") {
         const newId = prompt("Enter new Transaction ID:");
 
         if (newId) {
@@ -97,3 +101,13 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+function copyNumber(id) {
+    const text = document.getElementById(id).innerText;
+
+    navigator.clipboard.writeText(text).then(() => {
+        alert("✅ Number Copied: " + text);
+    });
+}
+if (localStorage.getItem("isVerified") === "true") {
+    window.location.href = "dashboard/index.html";
+}

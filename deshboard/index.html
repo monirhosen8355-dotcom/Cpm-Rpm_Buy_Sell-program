@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPM Trading Pro | Advanced Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
+<script src="../script.js"></script>
+</head>
+<body>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-chart-line"></i>
+                <span>CPM Pro</span>
+            </div>
+            <nav class="nav-menu">
+                <a href="#" class="active"><i class="fas fa-th-large"></i> Dashboard</a>
+                <a href="#"><i class="fas fa-chart-bar"></i> Live Market</a>
+                <a href="#"><i class="fas fa-satellite-dish"></i> Signals</a>
+                <a href="#"><i class="fas fa-wallet"></i> Wallet</a>
+                <a href="#"><i class="fas fa-history"></i> History</a>
+                <a href="#"><i class="fas fa-cog"></i> Settings</a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="user-card">
+                    <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="User">
+                    <div class="user-info">
+                        <p class="name">Alex Rivera</p>
+                        <p class="status">Pro Account</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="top-header">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search markets (BTC, ETH, SOL...)">
+                </div>
+                <div class="header-actions">
+                    <div class="connection-status">
+                        <span class="dot"></span> Live Server
+                    </div>
+                    <i class="far fa-bell notification-icon"></i>
+                    <button class="deposit-btn">Deposit</button>
+                </div>
+            </header>
+
+            <!-- Stats Row -->
+            <section class="stats-grid">
+                <div class="stat-card glass">
+                    <p class="label">Total Balance</p>
+                    <h3 id="total-balance">$12,450.80</h3>
+                    <span class="trend up">+2.4% <i class="fas fa-arrow-up"></i></span>
+                </div>
+                <div class="stat-card glass">
+                    <p class="label">Today's Profit</p>
+                    <h3 class="text-green">+$420.15</h3>
+                    <span class="trend up">+1.2% <i class="fas fa-arrow-up"></i></span>
+                </div>
+                <div class="stat-card glass">
+                    <p class="label">Active Trades</p>
+                    <h3>12</h3>
+                    <span class="trend">Running</span>
+                </div>
+                <div class="stat-card glass">
+                    <p class="label">Win Rate</p>
+                    <h3 class="text-blue">84%</h3>
+                    <span class="trend">Monthly Avg</span>
+                </div>
+            </section>
+
+            <!-- Trading View & Order Panel Row -->
+            <section class="trading-row">
+                <div class="chart-container glass">
+                    <div class="chart-header">
+                        <div class="coin-selector">
+                            <button onclick="changePair('BTCUSDT')" class="pair-btn active">BTC</button>
+                            <button onclick="changePair('ETHUSDT')" class="pair-btn">ETH</button>
+                            <button onclick="changePair('SOLUSDT')" class="pair-btn">SOL</button>
+                            <button onclick="changePair('BNBUSDT')" class="pair-btn">BNB</button>
+                        </div>
+                        <div class="live-price-head">
+                            <span id="current-pair-name">BTC/USDT</span>
+                            <span id="live-price-val" class="price-up">$64,231.50</span>
+                        </div>
+                    </div>
+                    <!-- TradingView Widget BEGIN -->
+                    <div id="tradingview_widget"></div>
+                    <!-- TradingView Widget END -->
+                </div>
+
+                <div class="order-panel glass">
+                    <div class="tabs">
+                        <button class="tab active">Market</button>
+                        <button class="tab">Limit</button>
+                    </div>
+                    <div class="order-form">
+                        <div class="input-group">
+                            <label>Amount (USDT)</label>
+                            <input type="number" id="trade-amount" value="1000">
+                        </div>
+                        <div class="leverage-slider">
+                            <label>Leverage: <span id="lev-val">20x</span></label>
+                            <input type="range" min="1" max="100" value="20">
+                        </div>
+                        <div class="order-details">
+                            <p><span>Fee:</span> <span>0.02%</span></p>
+                            <p><span>Margin:</span> <span>50.00 USDT</span></p>
+                        </div>
+                        <div class="action-buttons">
+                            <button class="btn-buy">Buy / Long</button>
+                            <button class="btn-sell">Sell / Short</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Market List & Logs -->
+            <section class="bottom-grid">
+                <div class="market-list glass">
+                    <h4>Market Overview</h4>
+                    <table class="market-table">
+                        <thead>
+                            <tr>
+                                <th>Coin</th>
+                                <th>Price</th>
+                                <th>24h Change</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="market-body">
+                            <!-- Dynamic Content via JS -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="activity-logs glass">
+                    <h4>Recent Activity</h4>
+                    <div class="log-list" id="log-list">
+                        <!-- Dynamic Logs -->
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Notification Popup -->
+    <div id="notification" class="notification-toast">
+        <div class="notif-icon"><i class="fas fa-check-circle"></i></div>
+        <div class="notif-content">
+            <p id="notif-text">User earned $50.00</p>
+        </div>
+    </div>
+
+    <!-- TradingView JS -->
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <script src="script.js"></script>
+    <button onclick="logout()">Logout</button>
+</body>
+</html>
