@@ -47,13 +47,13 @@ function verifyTransaction() {
             localStorage.setItem('usedTransactions', JSON.stringify(usedList));
 
             statusBox.className = "status-box success";
-            statusBox.innerHTML = "✅ Payment Verified! Access Granted";
+            statusBox.innerHTML = "🎉 Payment Verified! Welcome to CPM Income System";
         }
 
         // Invalid
         else {
             statusBox.className = "status-box error";
-            statusBox.innerHTML = "❌ Invalid or not approved yet";
+            statusBox.innerHTML = "❌ Transaction not found. 5-10 মিনিট wait করুন";
         }
 
         verifyBtn.disabled = false;

@@ -3,43 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Complete Payment | Success Academy</title>
+    <title>Complete Payment | CPM System</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="payment-body">
+
     <div class="bg-overlay"></div>
-    
+
     <div class="container payment-container">
         <div class="glass-card payment-card">
-            <h2>Complete Your Payment</h2>
-            <p>Send the course fee to the numbers below:</p>
-            
-            <div class="payment-methods">
-                <div class="method">
-                    <span class="brand">bKash (Personal):</span>
-                    <span class="number">01700000000</span>
-                </div>
-                <div class="method">
-                    <span class="brand">Nagad (Personal):</span>
-                    <span class="number">01900000000</span>
-                </div>
-            </div>
 
+            <h2>💰 Complete Your Payment</h2>
+
+            <!-- PRICE -->
+            <p style="font-size:18px;">
+                💥  
+                <span style="color:#00ffcc; font-weight:bold;">650৳</span>
+            </p>
+
+            <!-- TIMER -->
+            <p style="margin-top:10px; color:yellow;">
+                ⏳ Offer expires in: <span id="timer">05:00</span>
+            </p>
+
+            <p style="margin-top:10px;">
+                📌 নিচের নাম্বারে টাকা পাঠিয়ে আপনার Transaction ID দিন
+            </p>
+
+            <!-- PAYMENT -->
+            <div class="payment-methods">
+
+    <div class="method">
+        <span class="brand">bKash (Personal):</span>
+        <span class="number" id="bkashNum">01700000000</span>
+        <button onclick="copyNumber('bkashNum')"class="copy-btn">Copy</button>
+    </div>
+
+    <div class="method">
+        <span class="brand">Nagad (Personal):</span>
+        <span class="number" id="nagadNum">01900000000</span>
+        <button onclick="copyNumber('nagadNum')" class="copy-btn">Copy</button>
+    </div>
+
+</div>
+
+            <!-- WARNING -->
+            <p style="color:#ffcc00; font-size:14px;">
+                ⚠️ সঠিক Transaction ID না দিলে verification হবে না
+            </p>
+
+            <!-- INPUT -->
             <div class="input-group">
                 <label>Enter Transaction ID</label>
                 <input type="text" id="trxId" placeholder="e.g. 8N7X2W9L">
-                <button onclick="verifyTransaction()" id="verifyBtn" class="btn-primary">Verify Payment</button>
+
+                <button onclick="verifyTransaction()" id="verifyBtn" class="btn-primary">
+                    Verify Payment
+                </button>
             </div>
 
             <div id="statusBox" class="status-box"></div>
-            
-            <div class="admin-note">
-                <small>For testing: Use "TRX123" (if added via admin)</small>
-                <button onclick="adminPanel()" class="admin-btn">Admin Access</button>
-            </div>
+
+            <!-- TRUST TEXT -->
+            <p style="margin-top:15px; font-size:13px; color:#aaa;">
+                🔒 Secure Payment | Instant Access after Verification
+            </p>
+
         </div>
     </div>
 
+    <!-- TIMER SCRIPT -->
+    <script>
+        let time = 300;
+
+        function startTimer() {
+            setInterval(() => {
+                let minutes = Math.floor(time / 60);
+                let seconds = time % 60;
+
+                document.getElementById("timer").innerText =
+                    String(minutes).padStart(2, '0') + ":" +
+                    String(seconds).padStart(2, '0');
+
+                if (time <= 0) {
+                    time = 300; // reset again
+                } else {
+                    time--;
+                }
+            }, 1000);
+        }
+
+        startTimer();
+    </script>
+
     <script src="script.js"></script>
+    <button onclick="adminPanel()" style="margin-top:10px; opacity:0.5;">
+Admin Access
+</button>
 </body>
 </html>
