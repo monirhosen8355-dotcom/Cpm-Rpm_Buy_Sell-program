@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Payment | Success Academy</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="payment-body">
+    <div class="bg-overlay"></div>
+    
+    <div class="container payment-container">
+        <div class="glass-card payment-card">
+            <h2>Complete Your Payment</h2>
+            <p>Send the course fee to the numbers below:</p>
+            
+            <div class="payment-methods">
+                <div class="method">
+                    <span class="brand">bKash (Personal):</span>
+                    <span class="number">01700000000</span>
+                </div>
+                <div class="method">
+                    <span class="brand">Nagad (Personal):</span>
+                    <span class="number">01900000000</span>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Enter Transaction ID</label>
+                <input type="text" id="trxId" placeholder="e.g. 8N7X2W9L">
+                <button onclick="verifyTransaction()" id="verifyBtn" class="btn-primary">Verify Payment</button>
+            </div>
+
+            <div id="statusBox" class="status-box"></div>
+            
+            <div class="admin-note">
+                <small>For testing: Use "TRX123" (if added via admin)</small>
+                <button onclick="adminPanel()" class="admin-btn">Admin Access</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
