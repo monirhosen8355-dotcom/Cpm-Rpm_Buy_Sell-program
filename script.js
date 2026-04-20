@@ -5,11 +5,15 @@ if (!localStorage.getItem('approvedTransactions')) {
     localStorage.setItem('approvedTransactions', JSON.stringify(['TRX12345', 'DEMO777']));
 }
 
+if (!localStorage.getItem('usedTransactions')) {
+    localStorage.setItem('usedTransactions', JSON.stringify([]));
+}
+
 // ===============================
-// VERIFY FUNCTION (ONE-TIME USE)
+// VERIFY FUNCTION
 // ===============================
 function verifyTransaction() {
-    localStorage.setItem("isVerified", "true");
+
     const trxInput = document.getElementById('trxId').value.trim();
     const statusBox = document.getElementById('statusBox');
     const verifyBtn = document.getElementById('verifyBtn');
@@ -30,31 +34,25 @@ function verifyTransaction() {
         let approvedList = JSON.parse(localStorage.getItem('approvedTransactions')) || [];
         let usedList = JSON.parse(localStorage.getItem('usedTransactions')) || [];
 
-        // Already used
         if (usedList.includes(trxInput)) {
             statusBox.className = "status-box error";
             statusBox.innerHTML = "❌ This TRX already used!";
         }
 
-        // Valid
         else if (approvedList.includes(trxInput)) {
 
-            // remove from approved
             approvedList = approvedList.filter(id => id !== trxInput);
             localStorage.setItem('approvedTransactions', JSON.stringify(approvedList));
 
-            // add to used
             usedList.push(trxInput);
             localStorage.setItem('usedTransactions', JSON.stringify(usedList));
 
+            localStorage.setItem("isVerified", "true");
+
             statusBox.className = "status-box success";
-            statusBox.innerHTML = "🎉 Payment Verified! Welcome to CPM Income System";
-            setTimeout(() => {
-    window.location.href = "dashboard/index.html";
-}, 2000);
+            statusBox.innerHTML = "🎉 Payment Verified!";
         }
 
-        // Invalid
         else {
             statusBox.className = "status-box error";
             statusBox.innerHTML = "❌ Transaction not found. 5-10 মিনিট wait করুন";
@@ -87,27 +85,12 @@ function adminPanel() {
 }
 
 // ===============================
-// SMOOTH SCROLL (SAFE)
+// COPY FUNCTION
 // ===============================
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        const target = this.getAttribute('href');
-
-        if (target !== "#") {
-            e.preventDefault();
-            document.querySelector(target).scrollIntoView({
-                behavior: 'smooth'
-            });
-        }
-    });
-});
 function copyNumber(id) {
     const text = document.getElementById(id).innerText;
 
     navigator.clipboard.writeText(text).then(() => {
         alert("✅ Number Copied: " + text);
     });
-}
-if (localStorage.getItem("isVerified") === "true") {
-    window.location.href = "dashboard/index.html";
 }
